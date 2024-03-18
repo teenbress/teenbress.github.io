@@ -1,10 +1,10 @@
 # Site settings
 title: QiaoYu Portfolio
-SEOTitle: QiaoYu | Hux Blog
-header-img: img/home-bg.jpg
-email: huxpro@gmail.com
+SEOTitle: QiaoYu | Blog
+header-img: img/Memoirs.jpeg
+email: qiaoyee.job@gmail.com
 description: "QiaoYu Blog"
-keyword: "QiaoYu, Stat, CS, machine learning, Database, Datapipeline, Data"
+keyword: "QiaoYu, Stat, CS, machine learning, Database, Datapipeline, DSE"
 url: "https://teenbress.github.io/" # your host, for absolute URL
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -13,12 +13,12 @@ future: true
 
 # SNS settings
 RSS: false
-weibo_username: huxpro
-zhihu_username: huxpro
-github_username: huxpro
-twitter_username: huxpro
-#facebook_username:  huxpro
-#linkedin_username:  firstname-lastname-idxxxx
+#weibo_username: false
+#zhihu_username: false
+github_username: teenbress
+#twitter_username: false
+#facebook_username:  false
+linkedin_username:  qiao-yu
 
 # Build settings
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
@@ -36,7 +36,7 @@ exclude:
   ]
 anchorjs: true # if you want to customize anchor. check out line:181 of `post.html`
 # If you have timezone issue (e.g. #68) in China, uncomment to use this:
-#timezone: CN
+#timezone: US
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
@@ -59,7 +59,7 @@ kramdown:
       start_line: 1
 
 # Disqus settings
-disqus_username: hux
+disqus_username: teenbress
 
 # Netease settings
 netease_comment: false
@@ -69,13 +69,13 @@ netease_comment: false
 # ba_track_id: [your track id]
 
 # Google Analytics
-ga_track_id: "UA-49627206-1" # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+ga_track_id: "G-K1V0J2GBRM" # Format: UA-xxxxxx-xx 
+ga_domain: https://teenbress.github.io/
 
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.
-sidebar-about-description: "要做一个有 swag 的程序员 <br> React Team @ Meta"
-sidebar-avatar: https://github.com/Huxpro.png # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-about-description: "A end-to-end data enthusiast, focus on DS and DE track."
+sidebar-avatar: https://github.com/teenbress.png # use absolute URL, seeing it's used in both `/` and `/about/`
 
 # Featured Tags
 featured-tags: true # whether or not using Feature-Tags
@@ -89,14 +89,15 @@ service-worker: true
 page-mathjax: false
 
 # Friends
-friends:
-  [
-    { title: "乱序（Midare）", href: "http://mida.re/" },
-    { title: "Ebn Zhang", href: "https://ebnbin.dev/" },
-    { title: "Kun Qian", href: "http://kunq.me" },
-    { title: "Sherry Woo", href: "https://sherrywoo.me/" },
-    { title: "SmdCn", href: "http://blog.smdcn.net" },
-    { title: "JiyinYiyong", href: "http://tiye.me/" },
-    { title: "DHong Say", href: "http://dhong.co" },
-    { title: "尹峰以为", href: "http://ingf.github.io/" },
-  ]
+#friends: [
+#    {
+#        title: "简书·BY",
+#        href: "http://www.jianshu.com/u/e71990ada2fd"
+#    },{
+#        title: "Apple",
+#        href: "https://apple.com"
+#    },{
+#        title: "Apple Developer",
+#        href: "https://developer.apple.com/"
+#    }
+#]
