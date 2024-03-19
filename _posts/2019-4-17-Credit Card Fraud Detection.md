@@ -13,17 +13,9 @@ tags:
 
 ## Content
 #### I. Introduction
-#### II.Data Preparation
-- Data Overview
-- Check Missing Data
-- Check Data Balance   
+#### II.Data Preparation 
 #### III. Data Features Analysis    
-#### IV. Modelling   
-- Define Model Parameters
-- Logistic Regression Model
-- Random Forest
-- XGBoost
-- lightGBM   
+#### IV. Modelling     
 #### V. Conclusions
 
 ## I. Introduction
