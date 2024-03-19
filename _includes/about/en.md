@@ -18,4 +18,5 @@ I studied MS in Statistics (with a focus on Biostatistics) at [University of Flo
 - Music, Hiking
 
    
-Currently, my physical activities are mainly in California and New York, and I am actively seeking a job as a Data Scientist or Data Engineer. Please feel free to Email me anytime:[qiaoyee.job@gmail.com](qiaoyee.job@gmail.com).
+Currently, my physical activities are mainly in California and New York. And I am actively seeking a job as a Data Scientist or Data Engineer.    
+Feel free to Email me anytime: **[qiaoyee.job@gmail.com](qiaoyee.job@gmail.com)**.
