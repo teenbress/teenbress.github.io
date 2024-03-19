@@ -368,16 +368,13 @@ plt.show()
 In the report, we explore the data features, check the data balance and missing data. We set four models for predicting the data, and evaluate the models with metrics precision, recall, f1 score and ROC_AUC score.    
    
 Comparing to the classical algorithms like Logistic Regression, Random Forest, XGBoost and lightGBM have very good performances for detecting the big imbalance data. Especially XGBoost, its high recall rate and robust ROC_AUC score make it famous among data scientists. LightBGM has the similar advantages. Compared with XGBoost, lightGBM takes up less memory, cost less time, and has high precision.   
-   
-###### Table-1 Models Evaluation 
-**Models**|**ROC\_AUC**|**Precision**|**Recall**|**F1 Score**
-:-----:|:-----:|:-----:|:-----:|:-----:
-Logistic|0.854|0.71|0.71|0.71
-Random Forest|0.896|0.89|0.79|0.84
-XGBoost|0.976|0.9996|0.9998|0.9997
-Light GBM|0.956|0.9997|0.9952|0.9997       
-      
-![image](https://zichou.files.wordpress.com/2019/04/results-evaluation.png?w=405)
+
+
+<center>  
+    <img src ="https://zichou.files.wordpress.com/2019/04/e5beaee4bfa1e59bbee78987_20190417192226.png"
+    width="60%"> <br>
+</center>
+
       
 
  
