@@ -372,7 +372,7 @@ Comparing to the classical algorithms like Logistic Regression, Random Forest, X
 
 <center>  
     <img src ="https://zichou.files.wordpress.com/2019/04/e5beaee4bfa1e59bbee78987_20190417192226.png"
-    width="60%"> <br>
+    width="80%"> <br>
 </center>
 
       
