@@ -11,13 +11,6 @@ tags:
   - Imbalanced Data
 ---
 
-## Content
-#### I. Introduction
-#### II.Data Preparation 
-#### III. Data Features Analysis    
-#### IV. Modelling     
-#### V. Conclusions
-
 ## I. Introduction
 The PwC global economic crime survey of 2016 suggests that approximately 36% of organizations experienced economic crime. 
 Therefore, there is definitely a need to solve the problem of credit card fraud detection. 
@@ -31,7 +24,7 @@ I'll contain the most popular four imbalanced data mining models: **LR, Random F
 in order to find the best model which will help detect default and answer the questions:
 1. How to deal with imbalanced data?
 2. Which model is the robust predicting model for default payment?  
-I hope you'll enjoy this report.
+
 
 ## II. Data Preparation
 ### 2.1 Data overview
