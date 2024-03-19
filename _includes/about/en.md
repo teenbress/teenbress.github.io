@@ -1,6 +1,6 @@
 
 
-Hey, I am Qiao Yu (Michelle Yu, 余俏). 
+Hey, I am Qiao Yu (Michelle Yu). 
 
 I considered myself as a hybrid between a data scientist specifically into the data mining and statistical experiments domain (i.e. machine learning models, data visualization, A/B testing), and a data engineer (with Spark, Hadoop, Airflow, Prefect, terraform ect.) on cloud platforms in general. 
 
