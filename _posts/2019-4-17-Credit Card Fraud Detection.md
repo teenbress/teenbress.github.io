@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Credit Card Fraud Detection"
-subtitle: "Dreamers among programmers"
+subtitle: "Supervision Models Evaluation for Imbalanced Data"
 author: "Qiao Yu"
 header-img: "img/post-bg-creditcard.jpg"
 header-mask: 0.4
@@ -14,16 +14,16 @@ tags:
 ## Content
 #### I. Introduction
 #### II.Data Preparation
-* 2.1 Data Overview
-* 2.2 Check Missing Data
-* 2.3 Check Data Balance
-#### III. Data Features Analysis 
-#### IV. Modelling
-* 4.0 Define Model Parameters
-* 4.1 Logistic Regression Model
-* 4.2 Random Forest
-* 4.3 XGBoost
-* 4.4 lightGBM
+- Data Overview
+- Check Missing Data
+- Check Data Balance   
+#### III. Data Features Analysis    
+#### IV. Modelling   
+- Define Model Parameters
+- Logistic Regression Model
+- Random Forest
+- XGBoost
+- lightGBM   
 #### V. Conclusions
 
 ## I. Introduction
