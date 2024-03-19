@@ -1,7 +1,17 @@
-##  Credit Card Fraud Detection
-Qiao Yu
+---
+layout: post
+title: "Credit Card Fraud Detection"
+subtitle: "Dreamers among programmers"
+author: "Qiao Yu"
+header-img: "img/post-bg-creditcard.jpg"
+header-mask: 0.4
+tags:
+  - Data Science
+  - Machine Learning
+  - Imbalanced Data
+---
 
-### Content
+## Content
 #### I. Introduction
 #### II.Data Preparation
 * 2.1 Data Overview
@@ -16,7 +26,7 @@ Qiao Yu
 * 4.4 lightGBM
 #### V. Conclusions
 
-### I. Introduction
+## I. Introduction
 The PwC global economic crime survey of 2016 suggests that approximately 36% of organizations experienced economic crime. 
 Therefore, there is definitely a need to solve the problem of credit card fraud detection. 
 The task of fraud detection often boils down to outlier detection, in which a dataset is scanned through to find 
@@ -25,14 +35,14 @@ With the rise of machine learning, artificial intelligence, machine learning and
 it becomes feasible to automate this process and to save some of the intensive amount of labor that is put into 
 detecting credit card fraud. In the following sections, my machine learning based Pythonic approach is explained.
 This report contains two parts devoted to Exploratory Analysis and Prediction Models.
-I'll contain the most popular four imbalanced data mining models: LR, Random Forest, XGBoost, LightGBM,
+I'll contain the most popular four imbalanced data mining models: **LR, Random Forest, XGBoost, LightGBM**,
 in order to find the best model which will help detect default and answer the questions:
-1. How to analyze imbalanced big data?
-2. Which algorithms are the strongest predicting models for default payment?  
+1. How to deal with imbalanced data?
+2. Which model is the robust predicting model for default payment?  
 I hope you'll enjoy this report.
 
-### II. Data Preparation
-##### Data overview
+## II. Data Preparation
+### 2.1 Data overview
 The datasets contains transactions made by credit cards in September 2013 by european cardholders. This dataset presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. The dataset is highly unbalanced, the positive class (frauds) account for 0.172% of all transactions.
 The data set comes from the [Kaggle: Credit Card Fraud Detection](https://www.kaggle.com/mlg-ulb/creditcardfraud#creditcard.csv).  
 
@@ -47,8 +57,8 @@ The data set comes from the [Kaggle: Credit Card Fraud Detection](https://www.ka
  cost-senstive learning. 
  * Class: The response variable and it takes value 1 in case of fraud and 0 otherwise.
 
-###### Set Up
-```
+### 2.2 Set Up
+```py
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -75,7 +85,7 @@ from lightgbm import LGBMClassifier
 import xgboost as xgb
 ```
 Credit Card Fraud Detection data -  rows: 284807  columns: 31
-```
+```py
 data = pd.read_csv('creditcard.csv')
 print('Credit Card Fraud Detection Data -- rows:', data.shape[0],\
       'columns:', data.shape[1])
@@ -83,17 +93,17 @@ data.head()
 data.describe()
 ```
 The Credit Card Fraud Detection data contains 284807 rows and 31 columns, the target variable is 'Class', the other two of which are **Time** and **Amount**. For **Time**, we can confirm that the data contains 284,807 transactions, during 2 consecutive days (or 172792 seconds). The rest are output from the PCA transformation. 
-##### Check Missing Data
-```
+### 2.3 Check Missing Data
+```py
 data.isnull().sum().sort_values(ascending = False)
 percent = (data.isnull().sum()/data.isnull().count()*100).sort_values(ascending= False)
 ```
 There is no missing data. Then let's check the data balance.
-##### Check Data Balance
+### 2.4 Check Data Balance
 The target variable **class** set 0 as Not fraud, and 1 as fraud.
 Only 492 (or 0.172%) of transaction are fraudulent. 
-That means the data is highly unbalanced with respect with target variable Class.
-```
+That means the data is highly imbalanced with respect with target variable Class.
+```py
 count_classes = pd.value_counts(df['Class'], sort = True)
 count_classes.plot(kind = 'bar', rot=0)
 plt.title("Transaction class distribution")
@@ -101,10 +111,11 @@ plt.xticks(range(2), LABELS)
 plt.xlabel("Class")
 plt.ylabel("Frequency");
 ```
+![image](https://zichou.files.wordpress.com/2019/04/1_zkapbhr4-k4e8lb7xukjdq.png)   
 
-### III. Data Features Analysis
-##### Transactions in Time
-```
+## III. Data Features Analysis
+### 3.1 Transactions in Time
+```py
 class_0 = data.loc[data['Class'] == 0]['Time']
 class_1 = data.loc[data['Class'] == 1]['Time']
 hist_data = [class_0, class_1]
@@ -114,12 +125,14 @@ fig = ff.create_distplot(hist_data, group_labels, show_hist = False, show_rug = 
 fig['layout'].update(title = 'Credit Card Transactions Time Density Plot', xaxis = dict(title = 'Time [Secds]'))
 plot(fig, filename='dist_only')
 ```
+![image](https://zichou.files.wordpress.com/2019/04/credit-card-transactions-time-density-plot.png)   
+   
 The plot shows:
 Fraudulent transactions have a more equal distribution than actual transactions distribution, 
 neither peaks nor valleys. But when a transaction happened in night, it will be more 
 possible to be a fraudulent transaction.
-##### Transactions in Amount
-```
+### 3.2 Transactions in Amount
+```py
 fig, (ax1,ax2) = plt.subplots(ncols=2, figsize=(12,6))
 s = sns.boxplot(ax = ax1, x="Class", y="Amount", hue="Class",data=data, showfliers=False)
 s = sns.boxplot(ax = ax2, x="Class", y="Amount", hue="Class",data=data, showfliers=True)
@@ -134,9 +147,13 @@ ax = sns.lmplot(y="Amount", x="Time", fit_reg=False,aspect=1.8,
 plt.title("Amounts by Minutes of Frauds and Normal Transactions",fontsize=16)
 plt.show()
 ```
+![image](https://zichou.files.wordpress.com/2019/04/class-boxplot-1.png)
+![image](https://zichou.files.wordpress.com/2019/04/amount-of-fraudulent-transactions.png)   
+The three plots above shows,      
+fraudulent transactions happened almost all the time, but its amount is  much smaller than the normal one. That’s why the detection of fraudulent transactions is so important and difficult.
 
-##### Feature density plot
-```
+### 3.3 Feature density plot
+```py
 var = data.columns.values
 class0 = data.loc[data['Class'] == 0]
 class1 = data.loc[data['Class'] == 1]
@@ -155,9 +172,15 @@ for feature in var:
     plt.tick_params(axis='both', which='major', labelsize=12)
 plt.show()
 ```
-### IV. Modelling
-##### 4.0 Define Model Parameters
-```
+![image](https://zichou.files.wordpress.com/2019/04/features-correlation-heatmap.png)
+![image](https://zichou.files.wordpress.com/2019/04/features-density.png)   
+
+We could find that, V7 and V20 have high correlations with Amount, V5 and V12 seems have correlations with Time. In our case, as all of the features are transformed from PCA, it’s difficult to interpret the meaning of the correlations, if we got the raw data, heatmap and density plot will be useful.   
+     
+   
+## IV. Modelling
+### 4.0 Define Model Parameters
+```py
 target = 'Class'
 predictors = ['Time', 'V1', 'V2', 'V3', 'V4', 'V5', 'V6', 'V7', 'V8', 'V9', 'V10',\
        'V11', 'V12', 'V13', 'V14', 'V15', 'V16', 'V17', 'V18', 'V19',\
@@ -171,9 +194,9 @@ random_state = 2019
 train_d, test_d = train_test_split(data, test_size = 0.2, random_state = 2019, shuffle = True)
 train_d, valid_d = train_test_split(train_d, test_size = 0.2, random_state = 2019, shuffle = True)
 ```
-##### 4.1 Logistic Regression Model
+### 4.1 Logistic Regression Model
 Let's start from Logsitic regression model. I used GridSearchCV to select some parameters. It offered the best 'c'= 1, penalty = 'l2', and solver = 'liblinear'.
-```
+```py
 from sklearn.linear_model import LogisticRegression
 lgr = LogisticRegression(random_state=2019,solver='liblinear')
 param_grid = {'C': [0.1, 1, 10, 20],'penalty':['l1', 'l2']}
@@ -187,25 +210,26 @@ lgr.fit(train_d[predictors], train_d[target].values)
 preds = lgr.predict(valid_d[predictors])
 preds_t = lgr.predict(test_d[predictors])
 ```
-##### Model Evaluation
-How to evaluate our model?  
+### Model Evaluation
+**How to evaluate our model?**  
 In this case, our dataset is highly unbalanced, 
 it's more important to detect the fraudulent transactions than the normal ones.
-We'll use **Precision, Recall, F1 score** as our metrics, besides,
- **roc_auc_score** and the curves 
-will also give good evaluation for all the models.
-The area under ROC curve is **0.84**.
-The 0 classes (transactions without fraud) are predicted with 100% precision 
-and recall. It has some issues with detecting the 1 classes (transactions which are fraudulent). 
-It can predict fraud with 71% precision. This means that 29% of the transactions which are 
-fraudulent remain undetected by the system. 
-The result is not bad, but can we do something to make it better?
-Let's take a look at the second model : Random Forest.
-##### 4.2 Random Forest
-
-I'll use GINI as criterion, number of estimators is set to 100. We can also get feature importance rank through
-this model.The most important features are **V17, V12, V14, V10, V11, V16**.
+We'll use **Precision, Recall, F1 score** as our metrics, **roc_auc_score** and the curves will also also offer a good evaluation for all of the models.
+![image](https://zichou.files.wordpress.com/2019/04/typei-ii-001.png)
+![image](https://zichou.files.wordpress.com/2019/04/e5beaee4bfa1e59bbee78987_20190417180002.png)
+![image](https://zichou.files.wordpress.com/2019/04/e5beaee4bfa1e59bbee78987_20190417175854.png)   
+So, the logistic regression model get a ROC_AUC score of 0.835, recall 0.71, and f1 score 0.71,  which means, about 30% fraud could not be detected. We also use **K-folds cross validation** to improve the result, and we got a final **0.876** ROC_AUC score.  
+```py
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(lgr,train_d[predictors], train_d[target].values, cv=5, scoring='roc_auc')
+cross_val_score(lgr,test_d[predictors], test_d[target].values, cv=5, scoring='roc_auc')
 ```
+![image](https://zichou.files.wordpress.com/2019/04/e5beaee4bfa1e59bbee78987_20190417175754.png)
+   
+### 4.2 Random Forest
+
+First, define parameters. I used **GINI** as criterion, number of estimators is set to **100**. We can also get feature importance rank from the model. The most important features for random forest are V17, V14, V12, V10, V16, V11.
+```py
 clf = RandomForestClassifier(n_jobs=4, random_state=2019, criterion='gini', n_estimators=100,verbose=False)
 clf.fit(train_d[predictors],train_d[target].values)
 preds = clf.predict(valid_d[predictors])
@@ -219,8 +243,10 @@ s = sns.barplot(x='Feature', y='Feature importance',data=tmp)
 s.set_xticklabels(s.get_xticklabels(),rotation=90)
 plt.show()
 ```
-##### Model Evaluation
-```
+![image](https://zichou.files.wordpress.com/2019/04/rf-feature-importance-1.png)   
+
+### Model Evaluation
+```py
 roc_auc_score(test_d[target].values, preds_t)
 target_names = ['class 0', 'class 1']
 print(classification_report(test_d[target].values, preds_t, target_names=target_names))
@@ -229,11 +255,12 @@ The area under ROC curve is **0.90**. Let's focus on detecting the 1 classes (tr
 which are fraudulent). It can predict normal transactions with **89%** precision, sounds good. 
 It also got a recall rate at 0.79, which means **21%** of fraudulent undetected by the system,
  which is 10% higher than logistic regression model. And its F1 score is **0.84**.
- ##### 4.3 XGBoost
+ ### 4.3 XGBoost
  
  Random Forest is a kind of bagging algorithm, while XGBoost and LightGBM are popular boosting algorithms.
- Let's start from XGBoost.
- ```
+ First, define parameters.  As XGBoost contains a lot of parameters, the parameters selection is a long procession. 
+ Here I just list the final result.
+ ```py
  # prepare the model
 dtrain = xgb.DMatrix(train_d[predictors], train_d[target].values)
 dvalid = xgb.DMatrix(valid_d[predictors],valid_d[target].values)
@@ -258,8 +285,9 @@ fig, (ax) = plt.subplots(ncols=1, figsize=(8,5))
 xgb.plot_importance(model, height=0.8, title="Features importance (XGBoost)", ax=ax, color="darkblue")
 plt.show()
 ```
+![image](https://zichou.files.wordpress.com/2019/04/xgboost-feature-importance-2.png)
 
-```
+```py
 # predict test set
 preds = model.predict(dtest)
 roc_auc_score(test_d[target].values, preds)
@@ -291,19 +319,19 @@ def eval_boost(preds, labels):
     print('-------------------')
     print('Precision: {:.6f}\nRecall: {:.6f}\nF1 score: {:.6f}\n'.format(precision, recall, f_score))
 
- ```
- ```
 roc_auc_score(test_d[target].values, preds_t)
 preds_t = model.predict(dtest)
 labels_t = test_d[target].values
 eval_boost(preds_t, labels_t) 
- ```
+```
+![image](https://zichou.files.wordpress.com/2019/04/xgboost-1.png)
+
  The AUC score for the prediction of test set is **0.976**, Its precision is **0.9996**, 
- its recall is **0.9997** and its f1 score is **0.9997**! XGBoost always gives the best 
- and almost perfect result!
+ its recall is **0.9997** and its f1 score is **0.9997**!
+ XGBoost always gives the best and almost perfect result!
  
- #### 4.4 LightGBM
- ```
+ ### 4.4 LightGBM
+ ```py
  params = {
     'boosting_type': 'gbdt', 'objective': 'binary', 'metric': 'auc',
     'learning_rate': 0.03, 'num_leaves': 7, 'max_depth': 3,
@@ -323,7 +351,7 @@ VERBOSE_EVAL = 50 #Print out metric result
 IS_LOCAL = False
  ```
  Train the model
- ```
+ ```py
  dtrain = lgb.Dataset(train_d[predictors].values,label=train_d[target].values,feature_name=predictors)
 dvalid = lgb.Dataset(valid_d[predictors].values,label=valid_d[target].values,feature_name=predictors)
 
@@ -337,19 +365,29 @@ fig, (ax) = plt.subplots(ncols=1, figsize=(8,5))
 lgb.plot_importance(model, height=0.8, title="Features importance (LightGBM)", ax=ax,color="red")
 plt.show()
  ```
- 
- The ROC-AUC score obtained for the test set is **0.958**, lower than XGBoost, recall and f1 score also a bit lower
+![image](https://zichou.files.wordpress.com/2019/04/lightgbt-feature-importance.png)   
+![image](https://zichou.files.wordpress.com/2019/04/gbm2.png?w=375)      
+ For the test data, lightGBM got a **0.958** ROC_AUC score, its precision is 0.9997, recall is 0.995, and f1 score is 0.9974.
+ The ROC-AUC score of lightGBM is lower than XGBoost, recall and f1 score also a bit lower
  than XGBoost, but much higher than logistic regression and random forest.
  
  
-#### V. Conclusions
+## V. Conclusions
+In the report, we explore the data features, check the data balance and missing data. We set four models for predicting the data, and evaluate the models with metrics precision, recall, f1 score and ROC_AUC score.    
+   
+Comparing to the classical algorithms like Logistic Regression, Random Forest, XGBoost and lightGBM have very good performances for detecting the big imbalance data. Especially XGBoost, its high recall rate and robust ROC_AUC score make it famous among data scientists. LightBGM has the similar advantages. Compared with XGBoost, lightGBM takes up less memory, cost less time, and has high precision.   
+   
+###### Table-1 Models Evaluation 
+**Models**|**ROC\_AUC**|**Precision**|**Recall**|**F1 Score**
+:-----:|:-----:|:-----:|:-----:|:-----:
+Logistic|0.854|0.71|0.71|0.71
+Random Forest|0.896|0.89|0.79|0.84
+XGBoost|0.976|0.9996|0.9998|0.9997
+Light GBM|0.956|0.9997|0.9952|0.9997       
+      
+![image](https://zichou.files.wordpress.com/2019/04/results-evaluation.png?w=405)
+      
 
-We investigated the data, checking for data imbalance, analyzing the data features and understanding the relationship 
-between different features. We then investigated four predictive models. For all the four models, we used both valid 
-and test data sets, the table below listed all the results obtained by test data. Overall, 
-this study suggested that for the modeling of credit card risk recall rate of 0.9998 achieved 
-by XGBoost model has the best performance  compared to other models, LightGBM is the second rank top algorithm for
-imbalanced data.
  
  
 
