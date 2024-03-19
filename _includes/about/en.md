@@ -1,4 +1,6 @@
-Hey, I am Qiao Yu (Michelle Yu). 
+
+
+Hey, I am Qiao Yu (Michelle Yu, 余俏). 
 
 I considered myself as a hybrid between a data scientist specifically into the data mining and statistical experiments domain (i.e. machine learning models, data visualization, A/B testing), and a data engineer (with Spark, Hadoop, Airflow, Prefect, terraform ect.) on cloud platforms in general. 
 
@@ -6,5 +8,15 @@ I worked on [Cenports Commerce Inc.](https://www.cenports.com/), lead and establ
 
 I studied MS in Statistics (with a focus on Biostatistics) at [University of Florida](https://en.wikipedia.org/wiki/University_of_Florida) and BS in Oral Medicine at [Jinan University](https://en.wikipedia.org/wiki/Jinan_University).
 
-Currently, my physical activities are mainly in the Bay Area of California, and I am actively seeking a job as a Data Scientist or Data Engineer. Please feel free to [Email me](qiaoyee.job@gmail.com) anytime.
 
+### Skills
+
+- Python, Java, R
+- Statistical Modeling, Experiments Design, Data Visualization
+- MySQL, PostgreSQL, MangoDB, Apache Spark, Airflow, Kafka, Terraform, Tableau, PowerBI
+- AWS, Azure, GCP
+- Music, Hiking
+
+   
+Currently, my physical activities are mainly in California and New York. And I am actively seeking a job as a Data Scientist or Data Engineer.    
+Feel free to Email me anytime: **[qiaoyee.job@gmail.com](qiaoyee.job@gmail.com)**.
