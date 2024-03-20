@@ -2,7 +2,7 @@
 layout: post
 title: "Bitcoin Trading Package"
 subtitle: 'Bayesian Model for Trend Prediction'
-date:       2018-01-03 12:00:00
+date:       2017-12-20 12:00:00
 author:     "Qiao Yu"
 header-img: "img/post-bg-bitcoin-prediction.jpg"
 catalog: true
